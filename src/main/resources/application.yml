@@ -3,7 +3,7 @@ server :
 spring :
   datasource :
     driver-class-name: org.mariadb.jdbc.Driver
-    url : jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/ll_fesp01?allowMultiQueries=true
+    url : jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/we_db?allowMultiQueries=true
     username : ${DB_USERNAME:root}
     password : ${DB_PASSWORD:password}
 
