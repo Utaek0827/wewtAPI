@@ -1,11 +1,21 @@
 server :
-  port : 8080
+  port : 8082
+  
+#env 파일이 없을 경우 설정
 spring :
   datasource :
     driver-class-name: org.mariadb.jdbc.Driver
     url : jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/we_db?allowMultiQueries=true
     username : ${DB_USERNAME:root}
     password : ${DB_PASSWORD:password}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    async:
+      request-timeout: 5000
+
 
 
 mybatis :
