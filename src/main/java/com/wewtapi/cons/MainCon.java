@@ -1,14 +1,12 @@
 package com.wewtapi.cons;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +21,9 @@ import java.util.Objects;
 public class MainCon {
     //메인 홈화면 컨트롤러
 
+    @Value("${IMG_KEY}")
+    private String imgkey;
+
     @GetMapping("/")
     public String MatchList(){
 
@@ -36,12 +37,15 @@ public class MainCon {
     }
 
     @PostMapping(value = "/file", consumes = {"multipart/form-data"})
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("title") String title) throws IOException {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
+                                             @RequestParam("postContent") String postContent) throws IOException {
         File convFile = convertMultiPartToFile(file);
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", new FileSystemResource(convFile));
-        body.add("title", title);
+        body.add("key", imgkey);
+        body.add("service","wewt");
 
+        System.out.println("postContent:"+postContent);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
