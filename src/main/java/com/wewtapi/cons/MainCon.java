@@ -42,7 +42,10 @@ public class MainCon {
         File convFile = convertMultiPartToFile(file);
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", new FileSystemResource(convFile));
-        body.add("key", imgkey);
+        //body.add("key", imgkey);
+
+        body.add("key", "testkey2");
+        body.add("memberId","testid2");
         body.add("service","wewt");
 
         System.out.println("postContent:"+postContent);
